@@ -1,0 +1,31 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Template_1 = __importDefault(require("./Template"));
+/** Connection class */
+class Connection {
+    /**
+     * Constructor
+     * @param template
+     * @param creatorPrivateKey
+     */
+    constructor(template, creatorPrivateKey) {
+        /**
+         * generate Template
+         * @param callbackId
+         * @returns {TemplateInstance}
+         */
+        this.generateTemplate = (callbackId) => {
+            const templateInstance = {
+                ...this.template,
+                callbackUrl: this.template.callbackUrl + callbackId
+            };
+            return new Template_1.default(templateInstance);
+        };
+        this.creatorPrivateKey = creatorPrivateKey;
+        this.template = template;
+    }
+}
+exports.default = Connection;
